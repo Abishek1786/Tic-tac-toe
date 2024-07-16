@@ -122,6 +122,37 @@ function checkWin(board, player) {
 	return gameWon;
 }
 
+function gameOver(gameWon) {
+	for (let index of winCombos[gameWon.index]) {
+		document.getElementById(index).classList.add("win");
+	}
+	for (var i = 0; i < cells.length; i++) {
+		cells[i].removeEventListener('click', turnClick, false);
+		cells[i].classList.add('occupied');
+	}
+	if (gameWon.player == huPlayer){
+		player_score += 1;
+		if (document.getElementById('friend').checked == true)
+			winner_statement.innerText = "X is the winner!";
+		else
+			winner_statement.innerText = "You Won! :)";
+
+    	winner_statement.classList.add("playerWin");
+		html_player_score.innerText = player_score;
+	}
+	else {
+		computer_score += 1;
+		if (document.getElementById('friend').checked == true){
+			winner_statement.innerText = "O is the winner!";
+			winner_statement.classList.add("playerWin");
+		}
+		else {
+			winner_statement.innerText = "Computer Won :(";
+			winner_statement.classList.add("computerWin");
+		}
+		html_computer_score.innerText = computer_score;
+	}
+}
 
 
 function emptySquares() {
